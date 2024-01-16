@@ -1,5 +1,56 @@
 {% extends 'default.html' %}
 
 {% block content %}
-<h1>test</h1>
+<div class="container-md border border-dark rounded p-3">
+    <div class="row">
+        <div class="col-md-8" style="border:1px solid red;">
+            <div class="row p-2" > <!--style="background-color: #99cc66"-->
+                <div class="d-grid gap-1 d-md-block">
+                    <button type="button" class="btn btn-primary">ON/OFF</button>
+                    <button type="button" class="btn btn-primary">Tracking</button>
+                </div>
+            </div>
+            <div class="row" >Camera</div>
+        </div>
+        <div class="col-md-4" style="border:1px solid red;">
+            <div class="d-grid d-md-block p-2">
+                <div class="d-flex justify-content-between p-2">
+                    <button type="button" class="btn btn-success">TakeOFF</button>
+                    <button type="button" class="btn btn-warning">Land</button>
+                </div>
+
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <button type="button" class="btn btn-warning">turn left</button>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <button type="button" class="btn btn-primary">↑</button>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <button type="button" class="btn btn-warning">turn right</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <button type="button" class="btn btn-primary">←</button>
+                </div>
+                <div class="col-sm-4 text-center">
+
+                </div>
+                <div class="col-sm-4 text-center">
+                    <button type="button" class="btn btn-primary">→</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 text-center"></div>
+                <div class="col-sm-4 text-center">
+                    <button type="button" class="btn btn-primary">↓</button>
+                </div>
+                <div class="col-sm-4 text-center"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 {% endblock %}
