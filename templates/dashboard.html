@@ -1,54 +1,109 @@
 {% extends 'default.html' %}
 
 {% block content %}
-<div class="container-md border border-dark rounded p-3">
-    <div class="row">
-        <div class="col-md-8" style="border:1px solid red;">
-            <div class="row p-2" > <!--style="background-color: #99cc66"-->
-                <div class="d-grid gap-1 d-md-block">
-                    <button type="button" class="btn btn-primary">ON/OFF</button>
-                    <button type="button" class="btn btn-primary">Tracking</button>
-                </div>
+<div class="container">
+    <h1 class="mt-2">Drone Mission Control</h1>
+    <div class="pt-5">
+        {% if not is_connected %}
+        <form method="POST" action="/connect">
+            <button type="submit" class="btn btn-success control-btn">
+                <i class="fas fa-power-off"></i> connect
+            </button>
+        </form>
+        {% else %}
+        <form method="POST" action="/disconnect">
+            <button type="submit" class="btn btn-danger control-btn">
+                <i class="fas fa-power-off"></i> disconnect
+            </button>
+        </form>
+        {% endif %}
+    </div>
+
+    <h3 class="mt-5">
+        {% if is_connected %}
+            Status: <span class="text-success">Connected</span>
+        {% else %}
+            Status: <span class="text-danger">Not Connected</span>
+        {% endif %}
+    </h3>
+
+    <div class="row mt-4">
+        <!-- Camera Control Column -->
+        <div class="bg-light col-md-6 camera-column border border-5 rounded-lg p-5">
+            <h3>Camera View</h3>
+            <div>
+                <button class="btn btn-success control-btn" onclick="sendCommand('camera on')">
+                    <i class="fas fa-video"></i> Turn On
+                </button>
+                <button class="btn btn-danger control-btn" onclick="sendCommand('camera off')">
+                    <i class="fas fa-video-slash"></i> Turn Off
+                </button>
             </div>
-            <div class="row" >Camera</div>
         </div>
-        <div class="col-md-4" style="border:1px solid red;">
-            <div class="d-grid d-md-block p-2">
-                <div class="d-flex justify-content-between p-2">
-                    <button type="button" class="btn btn-success">TakeOFF</button>
-                    <button type="button" class="btn btn-warning">Land</button>
-                </div>
 
-            <div class="row">
-                <div class="col-sm-4 text-center">
-                    <button type="button" class="btn btn-warning">turn left</button>
-                </div>
-                <div class="col-sm-4 text-center">
-                    <button type="button" class="btn btn-primary">↑</button>
-                </div>
-                <div class="col-sm-4 text-center">
-                    <button type="button" class="btn btn-warning">turn right</button>
-                </div>
+        <!-- Drone Control Column -->
+        <div class="bg-light col-md-6 control-column border border-5 rounded-lg p-5">
+            <h3>Controls</h3>
+            <div class="space-btw">
+                <form method="POST" action="/takeoff">
+                    <button type="submit" class="btn btn-primary control-btn">
+                        <i class="fas fa-plane"></i> Takeoff
+                    </button>
+                </form>
+                <form method="POST" action="/land">
+                    <button type="submit" class="btn btn-danger control-btn" >
+                        <i class="fas fa-plane-slash"></i> Land
+                    </button>
+                </form>
             </div>
-            <div class="row">
-                <div class="col-sm-4 text-center">
-                    <button type="button" class="btn btn-primary">←</button>
-                </div>
-                <div class="col-sm-4 text-center">
+            <div class="space-btw">
+                <form method="POST" action="/forward">
+                <button type=submit class="btn btn-info control-btn">
+                    <i class="fas fa-arrow-up"></i>
+                </button>
+            </form>
 
-                </div>
-                <div class="col-sm-4 text-center">
-                    <button type="button" class="btn btn-primary">→</button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4 text-center"></div>
-                <div class="col-sm-4 text-center">
-                    <button type="button" class="btn btn-primary">↓</button>
-                </div>
-                <div class="col-sm-4 text-center"></div>
+            <form method="POST" action="/back">
+                <button type=submit class="btn btn-info control-btn">
+                    <i class="fas fa-arrow-down"></i>
+                </button>
+            </form>
+            <form method="POST" action="/left">
+                <button type="submit" class="btn btn-info control-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+            </form>
+
+            <form method="POST" action="/right">
+                <button type="submit" class="btn btn-info control-btn">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <form method="POST" action="/up">
+                <button type="submit" class="btn btn-warning control-btn">
+                    <i class="fas fa-arrow-up"></i> Up
+                </button>
+            </form>
+            <form method="POST" action="/down">
+                <button type="submit" class="btn btn-warning control-btn">
+                    <i class="fas fa-arrow-down"></i> Down
+                </button>
+            </form>
             </div>
 
+            <div class="space-btw">
+                <form method="POST" action="/turn_left">
+                    <button type="submit" class="btn btn-secondary control-btn">
+                        <i class="fas fa-undo"></i> Turn Left
+                    </button>
+                </form>
+                <form method="POST" action="/turn_right">
+                    <button type="submit" class="btn btn-secondary control-btn">
+                        <i class="fas fa-redo"></i> Turn Right
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
