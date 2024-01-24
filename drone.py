@@ -24,8 +24,9 @@ class Tello:
         self.video_on = False
         self._ready = False
         self.is_flying = False
+        self.connected = False
 
-        self.connect()
+        # self.connect()
         self.set_speed()
 
         """Separate Threads for listening to UDP Ports"""
@@ -43,8 +44,11 @@ class Tello:
 
     def connect(self):
         """Enter in SDK mode"""
+        self.connected = True
         self.send_command("command")
         time.sleep(1)
+
+
 
     def send_command(self, command):
         command_enc = command.encode(encoding="utf-8")
@@ -145,7 +149,8 @@ class Tello:
 
 
 class VideoTello(Tello):
-    pass
+    def __init__(self):
+        pass
 
 
 """ TESTING """
